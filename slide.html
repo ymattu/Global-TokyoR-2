@@ -11,6 +11,42 @@
   <link rel="stylesheet" href="slide_files/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { color: #800000; } /* DataType */
+code > span.dv { color: #0000ff; } /* DecVal */
+code > span.bn { color: #0000ff; } /* BaseN */
+code > span.fl { color: #800080; } /* Float */
+code > span.ch { color: #ff00ff; } /* Char */
+code > span.st { color: #dd0000; } /* String */
+code > span.co { color: #808080; font-style: italic; } /* Comment */
+code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
+code > span.fu { color: #000080; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #ff00ff; } /* SpecialChar */
+code > span.vs { color: #dd0000; } /* VerbatimString */
+code > span.ss { color: #dd0000; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { } /* ControlFlow */
+code > span.op { } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #808080; font-style: italic; } /* Documentation */
+code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 <link rel="stylesheet" href="slide_files/reveal.js-3.3.0.1/css/theme/sky.css" id="theme">
 
@@ -472,11 +508,76 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section id="agenda" class="slide level2">
 <h1>Agenda</h1>
 <ul>
-<li>Bayesian Optimization at machine learning</li>
-<li>Motivation to make this package</li>
+<li>Summary of this package</li>
+<li>Motivation</li>
 <li>Usage</li>
 <li>Future works</li>
 </ul>
+</section></section>
+<section><section id="summary-of-this-package" class="titleslide slide level1"><h1>Summary of this package</h1></section><section id="about-this-package" class="slide level2">
+<h1>About this package</h1>
+<ul>
+<li>MlBayesOpt(<a href="https://github.com/ymattu/MlBayesOpt" class="uri">https://github.com/ymattu/MlBayesOpt</a>)</li>
+<li>Tis package make it easier to write a script to execute parameter tuning using bayesian optimization.</li>
+<li>SVM(RBF kernel)、Random Forest、XGboost</li>
+<li>Based on SVM(e1071), RF(ranger), XGboost(xgboost), Bayesian Optimization(rBayesianoOtimization)</li>
+<li>Using Hold-out validation</li>
+</ul>
+</section></section>
+<section><section id="motivation-to-make-this-package" class="titleslide slide level1"><h1>Motivation to make this package</h1></section><section id="how-to-execute-bayesian-optimization-so-far" class="slide level2">
+<h1>How to execute Bayesian Optimization so far</h1>
+<h3 id="ex.-xgboost">ex. XGboost</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xgboost)
+<span class="kw">library</span>(Matrix)
+<span class="kw">library</span>(rBayesianOptimization)
+
+odd.n &lt;-<span class="st"> </span><span class="dv">2</span>*(<span class="dv">1</span>:<span class="dv">75</span>)-<span class="dv">1</span>
+iris_train &lt;-<span class="st"> </span>iris[odd.n, ] <span class="co"># odd numbered rows for training data</span>
+iris_test &lt;-<span class="st"> </span>iris[-odd.n, ] <span class="co"># even numbered rows for test data</span></code></pre></div>
+</section><section id="how-to-execute-bayesian-optimization-so-far-1" class="slide level2">
+<h1>How to execute Bayesian Optimization so far</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># resahpe in order to deal with {xgboost} package</span>
+train.mx &lt;-<span class="st"> </span><span class="kw">sparse.model.matrix</span>(Species ~., iris_train)
+test.mx &lt;-<span class="st"> </span><span class="kw">sparse.model.matrix</span>(Species ~<span class="st"> </span>., iris_test)
+dtrain &lt;-<span class="st"> </span><span class="kw">xgb.DMatrix</span>(train.mx, <span class="dt">label =</span> <span class="kw">as.integer</span>(iris_train$Species) -<span class="st"> </span><span class="dv">1</span>)
+dtest &lt;-<span class="st"> </span><span class="kw">xgb.DMatrix</span>(test.mx, <span class="dt">label =</span> <span class="kw">as.integer</span>(iris_test$Species) -<span class="st"> </span><span class="dv">1</span>)
+
+<span class="co"># make a function to maximize</span>
+xgb_holdout &lt;-<span class="st"> </span>function(ex, mx, nr){
+    model &lt;-<span class="st"> </span><span class="kw">xgb.train</span>(<span class="dt">params=</span><span class="kw">list</span>(<span class="dt">objective =</span> <span class="st">&quot;multi:softmax&quot;</span>, <span class="dt">num_class =</span> <span class="dv">10</span>, <span class="dt">eval_metric =</span> <span class="st">&quot;mlogloss&quot;</span>,
+                                   <span class="dt">eta =</span> ex, <span class="dt">max_depth =</span> mx),
+                                   <span class="dt">data =</span> dtrain, <span class="dt">nrounds =</span> nr)
+    t.pred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, <span class="dt">newdata =</span> dtest)
+    Pred &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">diag</span>(<span class="kw">table</span>(test$label, t.pred)))/<span class="kw">nrow</span>(test)
+    <span class="kw">list</span>(<span class="dt">Score =</span> Pred, <span class="dt">Pred =</span> Pred)
+}</code></pre></div>
+</section><section id="how-to-execute-bayesian-optimization-so-far-2" class="slide level2">
+<h1>How to execute Bayesian Optimization so far</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Bayesian Optimization</span>
+opt_xgb &lt;-<span class="st"> </span><span class="kw">BayesianOptimization</span>(xgb_holdout,
+                                <span class="dt">bounds=</span><span class="kw">list</span>(<span class="dt">ex =</span> <span class="kw">c</span>(2L,5L), <span class="dt">mx =</span> <span class="kw">c</span>(4L,5L), <span class="dt">nr =</span> <span class="kw">c</span>(70L,160L)),
+                                <span class="dt">init_points =</span> <span class="dv">20</span>, <span class="dt">n_iter =</span> <span class="dv">1</span>, <span class="dt">acq =</span> <span class="st">&#39;ei&#39;</span>, <span class="dt">kappa =</span> <span class="fl">2.576</span>,
+                                <span class="dt">eps =</span> <span class="fl">0.0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>A long and bothering code !</p>
+</section></section>
+<section><section id="mlbayesopt" class="titleslide slide level1"><h1>{MlBayesOpt}</h1></section><section id="installation-and-reading" class="slide level2">
+<h1>Installation and Reading</h1>
+<h3 id="installation">Installation</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;ymattu/MlBayesOpt&quot;</span>)</code></pre></div>
+<h3 id="reading">Reading</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MlBayesOpt)</code></pre></div>
+</section></section>
+<section><section id="usage" class="titleslide slide level1"><h1>Usage</h1></section><section id="svm" class="slide level2">
+<h1>SVM</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
+
+res &lt;-<span class="st"> </span><span class="kw">svm_opt</span>(
+  <span class="dt">train_data =</span> iris_train,
+  <span class="dt">train_label =</span> iris_train$Species,
+  <span class="dt">test_data =</span> iris_test,
+  <span class="dt">test_label =</span> iris_test$Species,
+  <span class="dt">acq =</span> <span class="st">&quot;ucb&quot;</span>
+  )</code></pre></div>
 </section></section>
     </div>
   </div>
