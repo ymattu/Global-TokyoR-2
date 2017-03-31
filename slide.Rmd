@@ -60,7 +60,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 # Motivation to make this package
 ## How to execute Bayesian Optimization so far
-### ex. XGboost
+### ex. XGboost and iris data
 ```{r eval = FALSE}
 library(xgboost)
 library(Matrix)
@@ -126,4 +126,82 @@ res <- svm_opt(
   test_label = iris_test$Species,
   acq = "ucb"
   )
+```
+
+## Output of SVM (Excerpt)
+```{r eval=FALSE}
+elapsed = 0.00	Round = 1	gamma_opt = 6.e+04	cost_opt = 42.9050	Value = 0.3333
+elapsed = 0.01	Round = 2	gamma_opt = 6.e+04	cost_opt = 12.0327	Value = 0.3333
+elapsed = 0.00	Round = 3	gamma_opt = 7.e+04	cost_opt = 92.1573	Value = 0.3333
+elapsed = 0.01	Round = 4	gamma_opt = 9.e+04	cost_opt = 18.3716	Value = 0.3333
+elapsed = 0.01	Round = 5	gamma_opt = 8.e+04	cost_opt = 56.2588	Value = 0.3333
+# [...]
+elapsed = 0.00	Round = 19	gamma_opt = 2453.1625	cost_opt = 84.8863	Value = 0.3733
+elapsed = 0.00	Round = 20	gamma_opt = 1.e+05	cost_opt = 62.2435	Value = 0.3333
+elapsed = 0.01	Round = 21	gamma_opt = 1.e+04	cost_opt = 23.6688	Value = 0.5867
+
+ Best Parameters Found:
+Round = 15	gamma_opt = 1.e+04	cost_opt = 79.5983	Value = 0.6133
+```
+
+
+## Random Forest
+```{r eval=FALSE}
+set.seed(123)
+
+mod <- rf_opt(
+  train_data = iris_train,
+  train_label = iris_train$Species,
+  test_data = iris_test,
+  test_label = iris_test$Species,
+  mtry_range = c(1L, 4L)
+  )
+```
+
+
+## Output of Random Forest (Excerpt)
+```{r eval=FALSE}
+elapsed = 0.01	Round = 1	num_trees_opt = 288.0000	mtry_opt = 4.0000	Value = 1.0000
+elapsed = 0.03	Round = 2	num_trees_opt = 789.0000	mtry_opt = 3.0000	Value = 1.0000
+elapsed = 0.02	Round = 3	num_trees_opt = 410.0000	mtry_opt = 3.0000	Value = 1.0000
+elapsed = 0.04	Round = 4	num_trees_opt = 883.0000	mtry_opt = 4.0000	Value = 1.0000
+elapsed = 0.03	Round = 5	num_trees_opt = 941.0000	mtry_opt = 3.0000	Value = 1.0000
+# [...]
+elapsed = 0.01	Round = 19	num_trees_opt = 329.0000	mtry_opt = 2.0000	Value = 1.0000
+elapsed = 0.03	Round = 20	num_trees_opt = 955.0000	mtry_opt = 2.0000	Value = 1.0000
+elapsed = 0.01	Round = 21	num_trees_opt = 101.0000	mtry_opt = 2.0000	Value = 1.0000
+
+ Best Parameters Found:
+Round = 1	num_trees_opt = 288.0000	mtry_opt = 4.0000	Value = 1.0000
+```
+
+## XGboost
+```{r eval=FALSE}
+set.seed(71)
+
+res1 <- xgb_opt(train_data = iris_train,
+               train_label = iris_train$Species,
+               test_data = iris_test,
+               test_label = iris_test$Species,
+               objectfun = "multi:softmax",
+               classes = 3,
+               evalmetric = "merror"
+)
+```
+
+
+## Output of XGboost (Excerpt)
+```{r eval=FALSE}
+elapsed = 0.02	Round = 1	eta_opt = 0.8729	max_depth_opt = 6.0000	nrounds_opt = 123.8761	subsample_opt = 0.2789	bytree_opt = 0.5343	Value = 0.7467
+elapsed = 0.02	Round = 2	eta_opt = 0.5779	max_depth_opt = 6.0000	nrounds_opt = 144.4570	subsample_opt = 0.4523	bytree_opt = 0.4854	Value = 0.6933
+elapsed = 0.01	Round = 3	eta_opt = 0.3202	max_depth_opt = 6.0000	nrounds_opt = 88.6309	subsample_opt = 0.1219	bytree_opt = 0.4910	Value = 0.7467
+elapsed = 0.01	Round = 4	eta_opt = 0.5614	max_depth_opt = 4.0000	nrounds_opt = 76.5790	subsample_opt = 0.3092	bytree_opt = 0.6768	Value = 0.9600
+elapsed = 0.02	Round = 5	eta_opt = 0.3955	max_depth_opt = 6.0000	nrounds_opt = 157.8434	subsample_opt = 0.3799	bytree_opt = 0.9856	Value = 0.9867
+# [...]
+elapsed = 0.01	Round = 19	eta_opt = 0.6466	max_depth_opt = 5.0000	nrounds_opt = 82.4813	subsample_opt = 0.1647	bytree_opt = 0.6055	Value = 0.9733
+elapsed = 0.02	Round = 20	eta_opt = 0.7080	max_depth_opt = 4.0000	nrounds_opt = 94.7421	subsample_opt = 0.7886	bytree_opt = 0.9739	Value = 0.9867
+elapsed = 0.02	Round = 21	eta_opt = 0.1000	max_depth_opt = 6.0000	nrounds_opt = 93.1294	subsample_opt = 0.6490	bytree_opt = 0.9329	Value = 1.0000
+
+Best Parameters Found:
+Round = 10	eta_opt = 0.4986	max_depth_opt = 5.0000	nrounds_opt = 94.3087	subsample_opt = 0.9980	bytree_opt = 0.9219	Value = 1.0000
 ```

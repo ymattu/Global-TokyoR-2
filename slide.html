@@ -526,7 +526,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section></section>
 <section><section id="motivation-to-make-this-package" class="titleslide slide level1"><h1>Motivation to make this package</h1></section><section id="how-to-execute-bayesian-optimization-so-far" class="slide level2">
 <h1>How to execute Bayesian Optimization so far</h1>
-<h3 id="ex.-xgboost">ex. XGboost</h3>
+<h3 id="ex.-xgboost-and-iris-data">ex. XGboost and iris data</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xgboost)
 <span class="kw">library</span>(Matrix)
 <span class="kw">library</span>(rBayesianOptimization)
@@ -578,6 +578,71 @@ res &lt;-<span class="st"> </span><span class="kw">svm_opt</span>(
   <span class="dt">test_label =</span> iris_test$Species,
   <span class="dt">acq =</span> <span class="st">&quot;ucb&quot;</span>
   )</code></pre></div>
+</section><section id="output-of-svm-excerpt" class="slide level2">
+<h1>Output of SVM (Excerpt)</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elapsed =<span class="st"> </span><span class="fl">0.00</span>  Round =<span class="st"> </span><span class="dv">1</span>   gamma_opt =<span class="st"> </span><span class="fl">6.e+04</span>  cost_opt =<span class="st"> </span><span class="fl">42.9050</span>  Value =<span class="st"> </span><span class="fl">0.3333</span>
+elapsed =<span class="st"> </span><span class="fl">0.01</span>  Round =<span class="st"> </span><span class="dv">2</span>   gamma_opt =<span class="st"> </span><span class="fl">6.e+04</span>  cost_opt =<span class="st"> </span><span class="fl">12.0327</span>  Value =<span class="st"> </span><span class="fl">0.3333</span>
+elapsed =<span class="st"> </span><span class="fl">0.00</span>  Round =<span class="st"> </span><span class="dv">3</span>   gamma_opt =<span class="st"> </span><span class="fl">7.e+04</span>  cost_opt =<span class="st"> </span><span class="fl">92.1573</span>  Value =<span class="st"> </span><span class="fl">0.3333</span>
+elapsed =<span class="st"> </span><span class="fl">0.01</span>  Round =<span class="st"> </span><span class="dv">4</span>   gamma_opt =<span class="st"> </span><span class="fl">9.e+04</span>  cost_opt =<span class="st"> </span><span class="fl">18.3716</span>  Value =<span class="st"> </span><span class="fl">0.3333</span>
+elapsed =<span class="st"> </span><span class="fl">0.01</span>  Round =<span class="st"> </span><span class="dv">5</span>   gamma_opt =<span class="st"> </span><span class="fl">8.e+04</span>  cost_opt =<span class="st"> </span><span class="fl">56.2588</span>  Value =<span class="st"> </span><span class="fl">0.3333</span>
+<span class="co"># [...]</span>
+elapsed =<span class="st"> </span><span class="fl">0.00</span>  Round =<span class="st"> </span><span class="dv">19</span>  gamma_opt =<span class="st"> </span><span class="fl">2453.1625</span>   cost_opt =<span class="st"> </span><span class="fl">84.8863</span>  Value =<span class="st"> </span><span class="fl">0.3733</span>
+elapsed =<span class="st"> </span><span class="fl">0.00</span>  Round =<span class="st"> </span><span class="dv">20</span>  gamma_opt =<span class="st"> </span><span class="fl">1.e+05</span>  cost_opt =<span class="st"> </span><span class="fl">62.2435</span>  Value =<span class="st"> </span><span class="fl">0.3333</span>
+elapsed =<span class="st"> </span><span class="fl">0.01</span>  Round =<span class="st"> </span><span class="dv">21</span>  gamma_opt =<span class="st"> </span><span class="fl">1.e+04</span>  cost_opt =<span class="st"> </span><span class="fl">23.6688</span>  Value =<span class="st"> </span><span class="fl">0.5867</span>
+
+ Best Parameters Found:
+Round =<span class="st"> </span><span class="dv">15</span>  gamma_opt =<span class="st"> </span><span class="fl">1.e+04</span>  cost_opt =<span class="st"> </span><span class="fl">79.5983</span>  Value =<span class="st"> </span><span class="fl">0.6133</span></code></pre></div>
+</section><section id="random-forest" class="slide level2">
+<h1>Random Forest</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
+
+mod &lt;-<span class="st"> </span><span class="kw">rf_opt</span>(
+  <span class="dt">train_data =</span> iris_train,
+  <span class="dt">train_label =</span> iris_train$Species,
+  <span class="dt">test_data =</span> iris_test,
+  <span class="dt">test_label =</span> iris_test$Species,
+  <span class="dt">mtry_range =</span> <span class="kw">c</span>(1L, 4L)
+  )</code></pre></div>
+</section><section id="output-of-random-forest-excerpt" class="slide level2">
+<h1>Output of Random Forest (Excerpt)</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elapsed =<span class="st"> </span><span class="fl">0.01</span>  Round =<span class="st"> </span><span class="dv">1</span>   num_trees_opt =<span class="st"> </span><span class="fl">288.0000</span>    mtry_opt =<span class="st"> </span><span class="fl">4.0000</span>   Value =<span class="st"> </span><span class="fl">1.0000</span>
+elapsed =<span class="st"> </span><span class="fl">0.03</span>  Round =<span class="st"> </span><span class="dv">2</span>   num_trees_opt =<span class="st"> </span><span class="fl">789.0000</span>    mtry_opt =<span class="st"> </span><span class="fl">3.0000</span>   Value =<span class="st"> </span><span class="fl">1.0000</span>
+elapsed =<span class="st"> </span><span class="fl">0.02</span>  Round =<span class="st"> </span><span class="dv">3</span>   num_trees_opt =<span class="st"> </span><span class="fl">410.0000</span>    mtry_opt =<span class="st"> </span><span class="fl">3.0000</span>   Value =<span class="st"> </span><span class="fl">1.0000</span>
+elapsed =<span class="st"> </span><span class="fl">0.04</span>  Round =<span class="st"> </span><span class="dv">4</span>   num_trees_opt =<span class="st"> </span><span class="fl">883.0000</span>    mtry_opt =<span class="st"> </span><span class="fl">4.0000</span>   Value =<span class="st"> </span><span class="fl">1.0000</span>
+elapsed =<span class="st"> </span><span class="fl">0.03</span>  Round =<span class="st"> </span><span class="dv">5</span>   num_trees_opt =<span class="st"> </span><span class="fl">941.0000</span>    mtry_opt =<span class="st"> </span><span class="fl">3.0000</span>   Value =<span class="st"> </span><span class="fl">1.0000</span>
+<span class="co"># [...]</span>
+elapsed =<span class="st"> </span><span class="fl">0.01</span>  Round =<span class="st"> </span><span class="dv">19</span>  num_trees_opt =<span class="st"> </span><span class="fl">329.0000</span>    mtry_opt =<span class="st"> </span><span class="fl">2.0000</span>   Value =<span class="st"> </span><span class="fl">1.0000</span>
+elapsed =<span class="st"> </span><span class="fl">0.03</span>  Round =<span class="st"> </span><span class="dv">20</span>  num_trees_opt =<span class="st"> </span><span class="fl">955.0000</span>    mtry_opt =<span class="st"> </span><span class="fl">2.0000</span>   Value =<span class="st"> </span><span class="fl">1.0000</span>
+elapsed =<span class="st"> </span><span class="fl">0.01</span>  Round =<span class="st"> </span><span class="dv">21</span>  num_trees_opt =<span class="st"> </span><span class="fl">101.0000</span>    mtry_opt =<span class="st"> </span><span class="fl">2.0000</span>   Value =<span class="st"> </span><span class="fl">1.0000</span>
+
+ Best Parameters Found:
+Round =<span class="st"> </span><span class="dv">1</span>   num_trees_opt =<span class="st"> </span><span class="fl">288.0000</span>    mtry_opt =<span class="st"> </span><span class="fl">4.0000</span>   Value =<span class="st"> </span><span class="fl">1.0000</span></code></pre></div>
+</section><section id="xgboost" class="slide level2">
+<h1>XGboost</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">71</span>)
+
+res1 &lt;-<span class="st"> </span><span class="kw">xgb_opt</span>(<span class="dt">train_data =</span> iris_train,
+               <span class="dt">train_label =</span> iris_train$Species,
+               <span class="dt">test_data =</span> iris_test,
+               <span class="dt">test_label =</span> iris_test$Species,
+               <span class="dt">objectfun =</span> <span class="st">&quot;multi:softmax&quot;</span>,
+               <span class="dt">classes =</span> <span class="dv">3</span>,
+               <span class="dt">evalmetric =</span> <span class="st">&quot;merror&quot;</span>
+)</code></pre></div>
+</section><section id="output-of-xgboost-excerpt" class="slide level2">
+<h1>Output of XGboost (Excerpt)</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elapsed =<span class="st"> </span><span class="fl">0.02</span>  Round =<span class="st"> </span><span class="dv">1</span>   eta_opt =<span class="st"> </span><span class="fl">0.8729</span>    max_depth_opt =<span class="st"> </span><span class="fl">6.0000</span>  nrounds_opt =<span class="st"> </span><span class="fl">123.8761</span>  subsample_opt =<span class="st"> </span><span class="fl">0.2789</span>  bytree_opt =<span class="st"> </span><span class="fl">0.5343</span> Value =<span class="st"> </span><span class="fl">0.7467</span>
+elapsed =<span class="st"> </span><span class="fl">0.02</span>  Round =<span class="st"> </span><span class="dv">2</span>   eta_opt =<span class="st"> </span><span class="fl">0.5779</span>    max_depth_opt =<span class="st"> </span><span class="fl">6.0000</span>  nrounds_opt =<span class="st"> </span><span class="fl">144.4570</span>  subsample_opt =<span class="st"> </span><span class="fl">0.4523</span>  bytree_opt =<span class="st"> </span><span class="fl">0.4854</span> Value =<span class="st"> </span><span class="fl">0.6933</span>
+elapsed =<span class="st"> </span><span class="fl">0.01</span>  Round =<span class="st"> </span><span class="dv">3</span>   eta_opt =<span class="st"> </span><span class="fl">0.3202</span>    max_depth_opt =<span class="st"> </span><span class="fl">6.0000</span>  nrounds_opt =<span class="st"> </span><span class="fl">88.6309</span>   subsample_opt =<span class="st"> </span><span class="fl">0.1219</span>  bytree_opt =<span class="st"> </span><span class="fl">0.4910</span> Value =<span class="st"> </span><span class="fl">0.7467</span>
+elapsed =<span class="st"> </span><span class="fl">0.01</span>  Round =<span class="st"> </span><span class="dv">4</span>   eta_opt =<span class="st"> </span><span class="fl">0.5614</span>    max_depth_opt =<span class="st"> </span><span class="fl">4.0000</span>  nrounds_opt =<span class="st"> </span><span class="fl">76.5790</span>   subsample_opt =<span class="st"> </span><span class="fl">0.3092</span>  bytree_opt =<span class="st"> </span><span class="fl">0.6768</span> Value =<span class="st"> </span><span class="fl">0.9600</span>
+elapsed =<span class="st"> </span><span class="fl">0.02</span>  Round =<span class="st"> </span><span class="dv">5</span>   eta_opt =<span class="st"> </span><span class="fl">0.3955</span>    max_depth_opt =<span class="st"> </span><span class="fl">6.0000</span>  nrounds_opt =<span class="st"> </span><span class="fl">157.8434</span>  subsample_opt =<span class="st"> </span><span class="fl">0.3799</span>  bytree_opt =<span class="st"> </span><span class="fl">0.9856</span> Value =<span class="st"> </span><span class="fl">0.9867</span>
+<span class="co"># [...]</span>
+elapsed =<span class="st"> </span><span class="fl">0.01</span>  Round =<span class="st"> </span><span class="dv">19</span>  eta_opt =<span class="st"> </span><span class="fl">0.6466</span>    max_depth_opt =<span class="st"> </span><span class="fl">5.0000</span>  nrounds_opt =<span class="st"> </span><span class="fl">82.4813</span>   subsample_opt =<span class="st"> </span><span class="fl">0.1647</span>  bytree_opt =<span class="st"> </span><span class="fl">0.6055</span> Value =<span class="st"> </span><span class="fl">0.9733</span>
+elapsed =<span class="st"> </span><span class="fl">0.02</span>  Round =<span class="st"> </span><span class="dv">20</span>  eta_opt =<span class="st"> </span><span class="fl">0.7080</span>    max_depth_opt =<span class="st"> </span><span class="fl">4.0000</span>  nrounds_opt =<span class="st"> </span><span class="fl">94.7421</span>   subsample_opt =<span class="st"> </span><span class="fl">0.7886</span>  bytree_opt =<span class="st"> </span><span class="fl">0.9739</span> Value =<span class="st"> </span><span class="fl">0.9867</span>
+elapsed =<span class="st"> </span><span class="fl">0.02</span>  Round =<span class="st"> </span><span class="dv">21</span>  eta_opt =<span class="st"> </span><span class="fl">0.1000</span>    max_depth_opt =<span class="st"> </span><span class="fl">6.0000</span>  nrounds_opt =<span class="st"> </span><span class="fl">93.1294</span>   subsample_opt =<span class="st"> </span><span class="fl">0.6490</span>  bytree_opt =<span class="st"> </span><span class="fl">0.9329</span> Value =<span class="st"> </span><span class="fl">1.0000</span>
+
+Best Parameters Found:
+Round =<span class="st"> </span><span class="dv">10</span>  eta_opt =<span class="st"> </span><span class="fl">0.4986</span>    max_depth_opt =<span class="st"> </span><span class="fl">5.0000</span>  nrounds_opt =<span class="st"> </span><span class="fl">94.3087</span>   subsample_opt =<span class="st"> </span><span class="fl">0.9980</span>  bytree_opt =<span class="st"> </span><span class="fl">0.9219</span> Value =<span class="st"> </span><span class="fl">1.0000</span></code></pre></div>
 </section></section>
     </div>
   </div>
