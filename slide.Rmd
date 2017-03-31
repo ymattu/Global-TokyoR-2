@@ -215,7 +215,7 @@ res <- svm_opt(
   train_label = iris_train$Species,
   test_data = iris_test,
   test_label = iris_test$Species,
-  # about hyper parameters (optional, default is folloing)
+  # about hyper parameters (optional, default is following)
   gamma_range = c(10 ^ (-5), 10 ^ 5),
   c_range = c(10 ^ (-2), 10 ^ 2),
   # about bayesian optimization (optional, default is following)
