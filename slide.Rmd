@@ -45,6 +45,7 @@ knitr::opts_chunk$set(echo = TRUE,
 ![icon](./slide_img/twitter_icon.jpg)
 
 ## Agenda
+
 - Bayesian Optimization at machine learning
 - Motivation to make this package
 - Usage
