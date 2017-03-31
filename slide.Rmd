@@ -35,7 +35,7 @@ knitr::opts_chunk$set(echo = TRUE,
 ## Profile
 
 <div class="column1">
-- MATSUMURA Yuya <br> (松村優哉, @y__mattu)
+- Yuya MATSUMURA <br> (松村優哉, @y__mattu)
 - Graduate student of Keio University
 - Studying: Econometrics, Bayesian Statistics, Causal Inference
 - Languages: R, SAS, Python
