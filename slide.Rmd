@@ -1,5 +1,6 @@
 ---
 title: "R package to tune parameters using Bayesian Optimization"
+subtitle: "{MlBayesOpt}"
 author: "@y__mattu"
 date: "Global Tokyo.R #2 <br> April 1st, 2017"
 output:
@@ -44,3 +45,7 @@ knitr::opts_chunk$set(echo = TRUE,
 ![icon](./slide_img/twitter_icon.jpg)
 
 ## Agenda
+- Bayesian Optimization at machine learning
+- Motivation to make this package
+- Usage
+- Future works
