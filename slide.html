@@ -643,7 +643,35 @@ elapsed =<span class="st"> </span><span class="fl">0.02</span>  Round =<span cla
 
 Best Parameters Found:
 Round =<span class="st"> </span><span class="dv">10</span>  eta_opt =<span class="st"> </span><span class="fl">0.4986</span>    max_depth_opt =<span class="st"> </span><span class="fl">5.0000</span>  nrounds_opt =<span class="st"> </span><span class="fl">94.3087</span>   subsample_opt =<span class="st"> </span><span class="fl">0.9980</span>  bytree_opt =<span class="st"> </span><span class="fl">0.9219</span> Value =<span class="st"> </span><span class="fl">1.0000</span></code></pre></div>
+</section><section id="about-arguments" class="slide level2">
+<h1>About arguments</h1>
+<p>ex. SVM</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">svm_opt</span>(
+  <span class="co"># about dataset (at least required)</span>
+  <span class="dt">train_data =</span> iris_train,
+  <span class="dt">train_label =</span> iris_train$Species,
+  <span class="dt">test_data =</span> iris_test,
+  <span class="dt">test_label =</span> iris_test$Species,
+  <span class="co"># about hyper parameters (optional, default is folloing)</span>
+  <span class="dt">gamma_range =</span> <span class="kw">c</span>(<span class="dv">10</span> ^<span class="st"> </span>(-<span class="dv">5</span>), <span class="dv">10</span> ^<span class="st"> </span><span class="dv">5</span>),
+  <span class="dt">c_range =</span> <span class="kw">c</span>(<span class="dv">10</span> ^<span class="st"> </span>(-<span class="dv">2</span>), <span class="dv">10</span> ^<span class="st"> </span><span class="dv">2</span>),
+  <span class="co"># about bayesian optimization (optional, default is following)</span>
+  <span class="dt">init_points =</span> <span class="dv">20</span>,
+  <span class="dt">n_iter =</span> <span class="dv">1</span>,
+  <span class="dt">acq =</span> <span class="st">&quot;ei&quot;</span>,
+  <span class="dt">kappa =</span> <span class="fl">2.576</span>,
+  <span class="dt">eps =</span> <span class="fl">0.0</span>,
+  <span class="dt">kernel =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&quot;exponential&quot;</span>, <span class="dt">power =</span> <span class="dv">2</span>)
+  )</code></pre></div>
 </section></section>
+<section><section id="future-works" class="titleslide slide level1"><h1>Future Works</h1></section><section id="this-package-is-still-a-development-version" class="slide level2">
+<h1>This package is still a development version…</h1>
+<ul>
+<li>make functions to execute cross validation</li>
+<li>add kernels of SVM</li>
+</ul>
+</section></section>
+<section><section id="enjoy" class="titleslide slide level1"><h1>Enjoy!</h1></section></section>
     </div>
   </div>
 

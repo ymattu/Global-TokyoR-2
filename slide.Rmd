@@ -205,3 +205,32 @@ elapsed = 0.02	Round = 21	eta_opt = 0.1000	max_depth_opt = 6.0000	nrounds_opt = 
 Best Parameters Found:
 Round = 10	eta_opt = 0.4986	max_depth_opt = 5.0000	nrounds_opt = 94.3087	subsample_opt = 0.9980	bytree_opt = 0.9219	Value = 1.0000
 ```
+
+## About arguments
+ex. SVM
+```{r eval=FALSE}
+res <- svm_opt(
+  # about dataset (at least required)
+  train_data = iris_train,
+  train_label = iris_train$Species,
+  test_data = iris_test,
+  test_label = iris_test$Species,
+  # about hyper parameters (optional, default is folloing)
+  gamma_range = c(10 ^ (-5), 10 ^ 5),
+  c_range = c(10 ^ (-2), 10 ^ 2),
+  # about bayesian optimization (optional, default is following)
+  init_points = 20,
+  n_iter = 1,
+  acq = "ei",
+  kappa = 2.576,
+  eps = 0.0,
+  kernel = list(type = "exponential", power = 2)
+  )
+```
+
+# Future Works
+## This package is still a development version...
+- make functions to execute cross validation
+- add kernels of SVM
+
+# Enjoy!
