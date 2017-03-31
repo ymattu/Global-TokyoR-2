@@ -1,0 +1,46 @@
+---
+title: "R package to tune parameters using Bayesian Optimization"
+author: "@y__mattu"
+date: "Global Tokyo.R #2 <br> April 1st, 2017"
+output:
+  revealjs::revealjs_presentation:
+    transition: convex
+    css: for_revealjs.css
+    theme: sky
+    highlight: kate
+    center: true
+    self_contained: false
+    reveal_plugins: ["chalkboard"]
+    reveal_options:
+      slideNumber: true
+      chalkboard:
+        theme: whiteboard
+---
+
+```{r eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, comment=""}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      comment = "",
+                      fig.height = 7,
+                      fig.width = 7,
+                      out.height = 400,
+                      out.width = 400)
+```
+
+# Introduction
+
+## Profile
+
+<div class="column1">
+- MATSUMURA Yuya <br> (松村優哉, @y__mattu)
+- Graduate student of Keio University
+- Studying: Econometrics, Bayesian Statistics, Causal Inference
+- Languages: R, SAS, Python
+</div>
+
+<div class="column2">
+![icon](./slide_img/twitter_icon.jpg)
+
+## Agenda
