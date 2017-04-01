@@ -499,11 +499,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <div class="column1">
 <ul>
 <li>Yuya MATSUMURA <br> (松村優哉)</li>
-<li>Twitter: <strong>y__mattu</strong></li>
-<li>GitHub: <strong>ymattu</strong></li>
+<li><font color="Thistle">Twitter</font>: <strong>y__mattu</strong></li>
+<li><font color="Thistle">GitHub</font>: <strong>ymattu</strong></li>
 <li>Graduate student of Keio University</li>
-<li>Studying: Econometrics, Bayesian Statistics, Causal Inference</li>
-<li>Languages: R, SAS, Python</li>
+<li><font color="Thistle">Studying</font>: Econometrics, Bayesian Statistics, Causal Inference</li>
+<li><font color="Thistle">Languages</font>: R, SAS, Python</li>
 </ul>
 </div>
 <div class="column2">
@@ -545,7 +545,7 @@ iris_train &lt;-<span class="st"> </span>iris[odd.n, ] <span class="co"># odd nu
 iris_test &lt;-<span class="st"> </span>iris[-odd.n, ] <span class="co"># even numbered rows for test data</span></code></pre></div>
 </section><section id="how-to-execute-bayesian-optimization-so-far-1" class="slide level2">
 <h1>How to execute Bayesian Optimization so far</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># resahpe in order to deal with {xgboost} package</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># resahpe data in order to deal with {xgboost} package</span>
 train.mx &lt;-<span class="st"> </span><span class="kw">sparse.model.matrix</span>(Species ~., iris_train)
 test.mx &lt;-<span class="st"> </span><span class="kw">sparse.model.matrix</span>(Species ~<span class="st"> </span>., iris_test)
 dtrain &lt;-<span class="st"> </span><span class="kw">xgb.DMatrix</span>(train.mx, <span class="dt">label =</span> <span class="kw">as.integer</span>(iris_train$Species) -<span class="st"> </span><span class="dv">1</span>)
@@ -567,7 +567,8 @@ opt_xgb &lt;-<span class="st"> </span><span class="kw">BayesianOptimization</spa
                                 <span class="dt">bounds=</span><span class="kw">list</span>(<span class="dt">ex =</span> <span class="kw">c</span>(2L,5L), <span class="dt">mx =</span> <span class="kw">c</span>(4L,5L), <span class="dt">nr =</span> <span class="kw">c</span>(70L,160L)),
                                 <span class="dt">init_points =</span> <span class="dv">20</span>, <span class="dt">n_iter =</span> <span class="dv">1</span>, <span class="dt">acq =</span> <span class="st">&#39;ei&#39;</span>, <span class="dt">kappa =</span> <span class="fl">2.576</span>,
                                 <span class="dt">eps =</span> <span class="fl">0.0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>A long and bothering code !</p>
+<p>I want to make code shorter!</p>
+<p><strong>“No packages? OK, develop it!”</strong></p>
 </section></section>
 <section><section id="mlbayesopt" class="titleslide slide level1"><h1>{MlBayesOpt}</h1></section><section id="installation-and-loading" class="slide level2">
 <h1>Installation and Loading</h1>

@@ -36,11 +36,11 @@ knitr::opts_chunk$set(echo = TRUE,
 
 <div class="column1">
 - Yuya MATSUMURA <br> (松村優哉)
-- Twitter: **y\_\_mattu**
-- GitHub: **ymattu**
+- <font color="Thistle">Twitter</font>: **y\_\_mattu**
+- <font color="Thistle">GitHub</font>: **ymattu**
 - Graduate student of Keio University
-- Studying: Econometrics, Bayesian Statistics, Causal Inference
-- Languages: R, SAS, Python
+- <font color="Thistle">Studying</font>: Econometrics, Bayesian Statistics, Causal Inference
+- <font color="Thistle">Languages</font>: R, SAS, Python
 </div>
 
 <div class="column2">
@@ -79,7 +79,7 @@ iris_test <- iris[-odd.n, ] # even numbered rows for test data
 
 ## How to execute Bayesian Optimization so far
 ```{r eval=FALSE}
-# resahpe in order to deal with {xgboost} package
+# resahpe data in order to deal with {xgboost} package
 train.mx <- sparse.model.matrix(Species ~., iris_train)
 test.mx <- sparse.model.matrix(Species ~ ., iris_test)
 dtrain <- xgb.DMatrix(train.mx, label = as.integer(iris_train$Species) - 1)
@@ -105,7 +105,9 @@ opt_xgb <- BayesianOptimization(xgb_holdout,
                                 eps = 0.0, verbose = TRUE)
 
 ```
-A long and bothering code !
+I want to make code shorter!
+
+**"No packages? OK, develop it!"**
 
 # {MlBayesOpt}
 
