@@ -521,7 +521,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h1>About this package</h1>
 <ul>
 <li>MlBayesOpt(<a href="https://github.com/ymattu/MlBayesOpt" class="uri">https://github.com/ymattu/MlBayesOpt</a>)</li>
-<li>Tis package make it easier to write a script to execute parameter tuning using bayesian optimization.</li>
+<li><font color="HotPink">This package make it easier to write a script to execute parameter tuning using bayesian optimization.</font></li>
 <li><strong>SVM</strong>(RBF kernel)、<strong>Random Forest</strong>、<strong>XGboost</strong></li>
 <li>Based on SVM({e1071}), RF({ranger}), XGboost({xgboost}), Bayesian Optimization({rBayesianOptimization})</li>
 <li>Using Hold-out validation</li>
@@ -529,7 +529,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section></section>
 <section><section id="motivation-to-make-this-package" class="titleslide slide level1"><h1>Motivation to make this package</h1></section><section id="how-to-execute-bayesian-optimization-so-far" class="slide level2">
 <h1>How to execute Bayesian Optimization so far</h1>
-<h3 id="ex.-xgboost-and-iris-data">ex. XGboost and iris data</h3>
+<h3 id="ex.-xgboost-and-iris-data">ex. XGboost and <code>iris</code> data</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xgboost)
 <span class="kw">library</span>(Matrix)
 <span class="kw">library</span>(rBayesianOptimization)
@@ -563,11 +563,11 @@ opt_xgb &lt;-<span class="st"> </span><span class="kw">BayesianOptimization</spa
                                 <span class="dt">eps =</span> <span class="fl">0.0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>A long and bothering code !</p>
 </section></section>
-<section><section id="mlbayesopt" class="titleslide slide level1"><h1>{MlBayesOpt}</h1></section><section id="installation-and-reading" class="slide level2">
-<h1>Installation and Reading</h1>
+<section><section id="mlbayesopt" class="titleslide slide level1"><h1>{MlBayesOpt}</h1></section><section id="installation-and-loading" class="slide level2">
+<h1>Installation and Loading</h1>
 <h3 id="installation">Installation</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;ymattu/MlBayesOpt&quot;</span>)</code></pre></div>
-<h3 id="reading">Reading</h3>
+<h3 id="loading">Loading</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MlBayesOpt)</code></pre></div>
 </section></section>
 <section><section id="usage" class="titleslide slide level1"><h1>Usage</h1></section><section id="svm" class="slide level2">

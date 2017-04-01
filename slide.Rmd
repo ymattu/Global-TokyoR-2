@@ -55,14 +55,14 @@ knitr::opts_chunk$set(echo = TRUE,
 # Summary of this package
 ## About this package
 - MlBayesOpt(https://github.com/ymattu/MlBayesOpt)
-- Tis package make it easier to write a script to execute parameter tuning using  bayesian optimization.
+- <font color="HotPink">This package make it easier to write a script to execute parameter tuning using  bayesian optimization.</font>
 - **SVM**(RBF kernel)、**Random Forest**、**XGboost**
 - Based on SVM({e1071}), RF({ranger}), XGboost({xgboost}), Bayesian Optimization({rBayesianOptimization})
 - Using Hold-out validation
 
 # Motivation to make this package
 ## How to execute Bayesian Optimization so far
-### ex. XGboost and iris data
+### ex. XGboost and `iris` data
 ```{r eval = FALSE}
 library(xgboost)
 library(Matrix)
@@ -105,13 +105,13 @@ A long and bothering code !
 
 # {MlBayesOpt}
 
-## Installation and Reading
+## Installation and Loading
 ### Installation
 ```{r eval=FALSE}
 devtools::install_github("ymattu/MlBayesOpt")
 ```
 
-### Reading
+### Loading
 ```{r eval=FALSE}
 library(MlBayesOpt)
 ```
