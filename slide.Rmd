@@ -242,5 +242,8 @@ res <- svm_opt(
 - add kernels of SVM
 
 ## Enjoy R programming !
+This slide is made from {revealjs} package.
+
 This slide and Rmd file are published on Git Hub(https://github.com/ymattu/Global-TokyoR-2).
+
 
