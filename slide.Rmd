@@ -36,11 +36,11 @@ knitr::opts_chunk$set(echo = TRUE,
 
 <div class="column1">
 - Yuya MATSUMURA <br> (松村優哉)
-- <font color="Thistle">Twitter</font>: **y\_\_mattu**
-- <font color="Thistle">GitHub</font>: **ymattu**
+- <u>Twitter</u>: **y\_\_mattu**
+- <u>GitHub</u>: **ymattu**
 - Graduate student of Keio University
-- <font color="Thistle">Studying</font>: Econometrics, Bayesian Statistics, Causal Inference
-- <font color="Thistle">Languages</font>: R, SAS, Python
+- <u>Studying</u>: Econometrics, Bayesian Statistics, Causal Inference
+- <u>Languages</u>: R, SAS, Python
 </div>
 
 <div class="column2">
