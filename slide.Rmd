@@ -8,7 +8,7 @@ output:
     transition: convex
     css: for_revealjs.css
     theme: sky
-    highlight: kate
+    highlight: pygments
     center: true
     self_contained: false
     reveal_plugins: ["chalkboard"]
