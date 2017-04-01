@@ -233,6 +233,6 @@ res <- svm_opt(
 - make functions to execute cross validation
 - add kernels of SVM
 
-# Enjoy R programming !
+## Enjoy R programming !
 This slide and Rmd file are published on Git Hub(https://github.com/ymattu/Global-TokyoR-2).
 
